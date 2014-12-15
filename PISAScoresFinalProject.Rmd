@@ -1,0 +1,167 @@
+---
+title: "PISA Scores Project"
+author: "Sam Eckhardt, Joey Miranda"
+date: "Tuesday, December 09, 2014"
+output: html_document
+---
+
+```{r setoptions, echo=FALSE}
+library(knitr)
+options(width=60, show.signif.stars=FALSE)
+opts_chunk$set(echo=TRUE,
+               results="asis",
+               warning=FALSE,
+               message=FALSE,
+               fig.width=5,
+               fig.height=4,
+               tidy=TRUE,
+               fig.align='center')
+```
+#Mission
+
+The mission of these visualizations is to see if there is a way for the United States to improve its education system. In the last 50 years, several countries have passed the United States in overall education success, with the U.S. falling to 14th in the most recent ranking. We will look at a few of the countries above the United States, using the  Programme for International Student Assessment (PISA), compiled the by Organisation for Economic Co-operation and Development (OECD). This data had over 400,000 observations of several hundred variables. 
+```{r}
+suppressPackageStartupMessages(library(googleVis))
+library(ggplot2)
+library(gridExtra)
+library(gtable)
+library(ggmap)
+library(rCharts)
+library(reshape2)
+library(scales)
+library(dplyr)
+load("student2012.rda")
+```
+#Countries Of Choice
+
+This is a Google Visualization showing the countries that we chose to focus our report on. Our first idea was to look at the top countries in the world for education. We found that Japan, Singapore, Hong Kong, Finland, the United Kingdom, the Netherlands, Ireland, and Poland were all in the top 10, and were included in the PISA data. We decided that these were the countries we would compare to the United States. We end up with several European and Asian countries, as well as the United States. 
+```{r}
+
+  
+Countries <- gvisGeoChart(Select2012, "CNT", "",
+                          options=list(region="world", displayMode="auto", resolution="countries",
+                                       width=600, height=400))
+#plot(Countries)
+print(Countries,file="Countries.html")
+```
+<iframe src="Countries.html" width="800" height="800"></iframe>
+
+#Question Selection
+
+Our next step was to choose which questions we felt would be worth while to visualize. We decided to focus on questions that the United States government could improve with some sort of bill or change in the education system. This does not include some questions such as "How many televisions do you have at home?" Our thinking is that if we were to find that the main problem with education was something along those lines, then that would be a much more difficult fix for our education system to do. We thought we would look at some of the questions that we felt would be easy to improve with some simple legislation. 
+
+#Failure Levels
+
+Our first thought was to look at failure levels. We thought we would compare the chosen countries to the united states, and count how many times their students had said they had repeated a grade. If there is a large and obvious difference between the United States and other nations in this regard, we have a basis for change.  
+```{r}
+#a=levels(student2012$CNT)
+
+Select2012= subset(student2012, CNT %in% c("Japan", "Singapore", "Hong Kong-China","Finland", "United Kingdom", "Netherlands", "Ireland", "Poland", "United States of America" ))
+
+Questions2012<-Select2012%>%
+  select(contains("CNT"),contains("ST04"),contains("ST07"),contains("ST29"),contains("ST43"),contains("ST44"),contains("ST46"),contains("ST49"),contains("ST55"),contains("ST57"),contains("ST69"),contains("ST70"),contains("ST71"))
+
+
+ggplot(Questions2012, aes(x=ST07Q01,fill=CNT))+geom_bar(position="dodge")
+
+```
+As you can see with the graph above, there are not very many people failing entire grades. We then looked at those that said they had failed, by filtering for only those that said "Yes, once"
+```{r}
+RepeatGradeCountry<-Questions2012%>%
+  filter(ST07Q01=="Yes, once")
+
+p1<-rPlot(x=list(var = "CNT", sort = "count(ST07Q01)"),y="count(ST07Q01)",data=RepeatGradeCountry,type="bar",las=2)
+p1$guides(x = list(title = "Country"))
+p1$guides(y = list(title = "Count"))
+p1$addParams(title = "Failure Rate")
+p1$save('chart1.html',cdn=TRUE)
+```
+<iframe src="chart1.html" width="800" height="600"></iframe>
+
+As we can see, the United States, the second bar, has 470 people polled that said they had to repeat a grade once. This is not necessarily an outrageous number, since all of the graphs are within a fairly similar range. Since the United States does not necessarily stand out in this particular case, our belief is that failure rates are not responsible for the difference between the United States and these other top 10 countries.  
+
+
+#Enjoyment
+
+Our next idea was to look at some questions related to enjoyment. The majority of the study focuses on mathematics, so our thought was to look at mathematics more than science and reading. This first graph asks the Question "Do you enjoy math?"
+```{r}
+MathEnjoy<-Questions2012%>%
+  filter(ST29Q04!="NA")%>%
+  filter(CNT!="United Kingdom")
+
+ggplot(MathEnjoy, aes(x=ST29Q04,fill=CNT))+geom_bar(position="dodge")
+```
+Not surprisingly, many of those polled disagree with that previous statement. Only Singapore, in the purple, really likes math more than it dislikes it. The United States falls right within the rest of the pack in enjoyment. 
+
+
+The next question is "How much do you expect to use math during your career?"
+```{r}
+MathCareer<-Questions2012%>%
+  filter(ST29Q05!="NA")
+
+ggplot(MathCareer, aes(x=ST29Q05,fill=CNT))+geom_bar(position="dodge")
+```
+Along with the pack, the United States' students believe that they will use math a large amount of math in their careers. Only Japan stands out, with a fair amount saying they would not use math. 
+```{r}
+
+MathStudy<-Questions2012%>%
+  filter(ST29Q07!="NA")
+
+ggplot(MathStudy, aes(x=ST29Q07,fill=CNT))+geom_bar(position="dodge")
+
+```
+
+
+#Effort
+```{r}
+MathEffort<-Questions2012%>%
+  filter(ST43Q01!="NA")
+
+ggplot(MathEffort, aes(x=ST43Q01,fill=CNT))+geom_bar(position="dodge")+gg_title()
+
+MathDemands<-Questions2012%>%
+  filter(ST43Q03!="NA")
+
+ggplot(MathDemands, aes(x=ST43Q03,fill=CNT))+geom_bar(position="dodge")+gg_title()
+
+MathDifficulty<-Questions2012%>%
+  filter(ST44Q01!="NA")
+ggplot(MathDifficulty, aes(x=ST44Q01,fill=CNT))+geom_bar(position="dodge")+gg_title()
+```
+#Preparation
+```{r}
+MathHWK<-Questions2012%>%
+  filter(ST46Q01!="NA")
+ggplot(MathHWK, aes(x=ST46Q01,fill=CNT))+geom_bar(position="dodge")+gg_title()
+
+MathPrep<-Questions2012%>%
+  filter(ST46Q03!="NA")
+ggplot(MathPrep, aes(x=ST46Q03,fill=CNT))+geom_bar(position="dodge")+gg_title()
+
+MathHours<-Questions2012%>%
+  filter(ST49Q05!="NA")
+ggplot(MathHours, aes(x=ST49Q05,fill=CNT))+geom_bar(position="dodge")+gg_title()
+```
+#Hours
+
+The United States spends less time on out of school lessons than the other countries
+```{r}
+SubjectHours<-Questions2012%>%
+  filter(ST55Q02!="NA")
+ggplot(SubjectHours, aes(x=ST55Q02,fill=CNT))+geom_bar(position="dodge")+gg_title()
+
+SubjectHours<-Questions2012%>%
+  filter(ST55Q02!="NA")
+ggplot(SubjectHours, aes(x=ST55Q01,fill=CNT))+geom_bar(position="dodge")+gg_title()
+
+SubjectHours<-Questions2012%>%
+  filter(ST55Q02!="NA")
+ggplot(SubjectHours, aes(x=ST55Q03,fill=CNT))+geom_bar(position="dodge")+gg_title()
+
+SubjectHours<-Questions2012%>%
+  filter(ST55Q02!="NA")
+ggplot(SubjectHours, aes(x=ST55Q04,fill=CNT))+geom_bar(position="dodge")+gg_title()
+
+SubjectPeriods<-Questions2012%>%
+  filter(ST70Q02!="NA")
+ggplot(SubjectPeriods, aes(x=ST70Q02,fill=CNT))+geom_bar()+gg_title()
