@@ -68,7 +68,7 @@ Our next step was to choose which questions we felt would be worth while to visu
 
 ##Failure Levels
 
-Our first thought was to look at failure levels. We thought we would compare the chosen countries to the united states, and count how many times their students had said they had repeated a grade. If there is a large and obvious difference between the United States and other nations in this regard, we have a basis for change.  
+Our first thought was to look at failure levels. We thought we would compare the chosen countries to the united states, and count how many times their students had said they have repeated a grade. If there is a large and obvious difference between the United States and other nations in this regard, we have a basis for investigation.  
 ```{r}
 #a=levels(student2012$CNT)
 
@@ -95,10 +95,11 @@ p1$save('chart1.html',cdn=TRUE)
 
 As we can see, the United States has 470 people polled that said they had to repeat a grade once. This is not necessarily an outrageous number, since all of the graphs are within a fairly similar range. Since the United States does not necessarily stand out in this particular case, our belief is that failure rates are not responsible for the difference between the United States and these other top 10 countries.  
 
+Since the survey continued on to evaluate each students opinions on multiple areas regarding schools subjects, we decided to look at the opinion of US students in comparison of the same top performing countries.  A vast majority of the questiones sought after the students opinion on their education in mathmaticsfar beyond simple math and problem solving equations.
 
 ##Enjoyment
 
-Our next idea was to look at some questions related to enjoyment. The majority of the study focuses on mathematics, so our thought was to look at mathematics more than science and reading. This first graph asks the question "Do you do math because you enjoy it?"
+Our next idea was to look at some questions related to enjoyment. The majority of the study focuses on mathematics, so our thought was to look at mathematics more than science and reading. This first graph asks the question "Do you learn math because you enjoy it?"
 ```{r}
 MathEnjoy<-Questions2012%>%
   filter(ST29Q04!="NA")%>%
@@ -106,17 +107,17 @@ MathEnjoy<-Questions2012%>%
 
 ggplot(MathEnjoy, aes(x=ST29Q04,fill=CNT))+geom_bar(position="dodge")+ggtitle('Do You Do Math Because you Enjoy It?')
 ```
-Not surprisingly, many of those polled disagree with the previous statement. Only Singapore, in the purple, really likes math more than it dislikes it. The United States falls right within the rest of the pack in enjoyment. 
+Surprisingly, many of those polled disagree with the previous statement. Only Singapore, in the purple, was the only country to say they enjoy math more that dislike it. The United States falls right within the rest of the pack in enjoyment. 
 
 
-The next question is "Do you beleive math will improve your career?"
+The next question is "Do you believe math will improve your career?"
 ```{r}
 MathCareer<-Questions2012%>%
   filter(ST29Q05!="NA")
 
 ggplot(MathCareer, aes(x=ST29Q05,fill=CNT))+geom_bar(position="dodge")+ggtitle('Do You Beleive Math Will Improve Your Career?')
 ```
-Along with the pack, the United States' students believe that their careers will improve because they know math. Only Japan stands out, with a fair amount saying the opposite. 
+Along with the pack, the United States' students believe that having a solid understainding of mathmatics will present them with a desirable career or improve a career they are already pursuing. Interestingly enough, Japan showed a trend with a fair amount of studuents saying the opposite. 
 
 The next question was "Do you expect to study math in the future?"
 ```{r}
@@ -127,22 +128,22 @@ MathStudy<-Questions2012%>%
 ggplot(MathStudy, aes(x=ST29Q07,fill=CNT))+geom_bar(position="dodge")+ggtitle('Do You Expect To Study Math In The Future?')
 
 ```
-Many students expect to have to use math in the future when it is involved with subects they are interested in. 
+This showed that many students expect to have to use math in the future. Showing that students are well aware math plays a pivotal role in their education, and that awareness is reciprocated in the United States as well.
 
 These three graphs show that while many American students do not enjoy math, they still expect to study and use it in the future. The enjoyment level does not change that fact. As well, the United States compares similarly to the rest of the selected countries in this regard. Enjoyment, therefore, is not a reason for the U.S. falling behind in this regard. 
 
 ##Effort
 
-Our next thought is perhaps effort on math studies may have been an issue for the United States. The next graph answers the question "If you put in enough effort, can you succeed in math?"
+Our next thought is perhaps U.S. students lack in how much effort put to into their math studies. The next graph answers the question "If you put in enough effort, can you succeed in math?"
 ```{r}
 MathEffort<-Questions2012%>%
   filter(ST43Q01!="NA")
 
 ggplot(MathEffort, aes(x=ST43Q01,fill=CNT))+geom_bar(position="dodge")+ggtitle('If You Put In The Effort, Can You Succeed In Math?')
 ```
-Across the board, each of these countries' students believe that they can put enough effort to succeed into math, with very few disagreeing. the United States is in that pack as well. Since many students believe that if they can put in the effort, then they can succeed in math, the demands of other issues may be too high for the students to put in the amount of effort. This next graph shows whether the demands of other time constraints are too high.
+Across the board, each of these countries' students believe that they can put enough effort to succeed into math, with very few disagreeing. The United States is in that pack as well. Since many students believe that if they can put in the effort, then they can succeed in math, it could be possible the demands of other possible obligations may be too high for the students to put in the optimal amount of effort in mathmatics specifically. 
 
-
+This next graph shows whether the demands of other time constraints are too conflicting for students to perform at their best in math.
 ```{r}
 MathDemands<-Questions2012%>%
   filter(ST43Q03!="NA")
@@ -151,18 +152,18 @@ ggplot(MathDemands, aes(x=ST43Q03,fill=CNT))+geom_bar(position="dodge")+ggtitle(
 ```
 Most of the students polled say that other subjects are not too demanding, and the U.S. is right in the pack with the top 10 nations. 
 
-Another factor we looked at was whether math is too difficult. The next question is a competency question about ability to solve mathematics problems. The answers range from likely to get a question wrong due to incompetency, to not likely to get a question wrong due to incompetency. 
+Another factor we looked at was whether math is too difficult. The next question is a competency question about their ability to solve mathematics problems. The answers range from likely to get a question wrong due to incompetency, to not likely to get a question wrong due to incompetency.  
 ```{r}
 MathDifficulty<-Questions2012%>%
   filter(ST44Q01!="NA")
 ggplot(MathDifficulty, aes(x=ST44Q01,fill=CNT))+geom_bar(position="dodge")+ggtitle('If You Fail, Is It Due To Difficulty?')
 ```
-As we can see, this is the case for many students. The United States, though, is still going with the pack here, and not particularly standing out. 
-So effort, demands, and difficulty are not a factor is how the U.S. is performing comparing to the rest of the world. Lets look at another area to see how the United States compares. 
+As we can see, this is the case for many students. The United States, though, is still going with the pack here, and not particularly standing out, there is a slight shift towards likely but it could be negligable. 
+It goes to show effort, demands, and difficulty are not a factor in how the U.S. is performing comparing to the rest of the world. Lets look at another area to see how the US compares.
 
 ##Preparation
 
-Preparation is a major factor for success in any subject. If one is prepared for a test, one is much more likely to do well, especially in a subject such as math. This could likely be a place where the United States falls behind. 
+Preparation is a major factor to success in any subject. If one is prepared for a test, one is much more likely to do well, especially in a subject such as math. This could likely be a place where the United States falls behind. 
 The first question is "Do you get your homework done before class time on a usual basis?"
 ```{r}
 MathHWK<-Questions2012%>%
@@ -177,7 +178,7 @@ MathPrep<-Questions2012%>%
   filter(ST46Q03!="NA")
 ggplot(MathPrep, aes(x=ST46Q03,fill=CNT))+geom_bar(position="dodge")+ggtitle('Do You Study Enough?')
 ```
-The United States says that for the most part, they are, and they are right there with the rest of the top 10. 
+The United States says that for the most part they are, similarly they are right there with the rest of the top 10. 
 
 The next question is "Do you keep studying until you understand the material?"
 ```{r}
@@ -197,9 +198,9 @@ SubjectHoursMath<-Questions2012%>%
   filter(ST55Q02!="NA")
 ggplot(SubjectHoursMath, aes(x=ST55Q02,fill=CNT))+geom_bar(position="dodge")+ggtitle('Hours Of Outside Lessons: Math')
 ```
-To us, it looked like there was a bit of a difference here than in the rest of the questions. The United States sees a very drastic drop off as hours of lessons outside of school increases. This also occurs at a faster rate than most of the other nations. The only country that seems to drop off at a faster rate is Ireland. 
+To us, it looked like there was a bit of a difference here than in the rest of the questions we examined. The United States sees a very drastic drop off as hours of lessons outside of school increases. This also occurs at a faster rate than most of the other nations. The only country that seems to drop off at a faster rate is Ireland. 
 
-We looked at the other subjects just for this reason. Here are the other subjects: Language, Science and all other subjects
+We then looked at the other subjects just for this reason. Here are the other subjects: Language, Science and all other subjects
 ```{r}
 SubjectHoursLanguage<-Questions2012%>%
   filter(ST55Q01!="NA")
@@ -218,4 +219,4 @@ SubjectHours<-Questions2012%>%
 ggplot(SubjectHours, aes(x=ST55Q04,fill=CNT))+geom_bar(position="dodge")+ggtitle('Hours Of Outside Lessons: Other')
 ```
 
-This trend still holds in all subjects polled: other than normal school, students in the United States do not do many subject lessons compared to the rest of the world. This can be an easy fix for educators; another evening period, or another week of classes every year could help this issue, since many of the other countries do take other lessons outside of school. Both of those options would help American students get better compared to the other countries. 
+This trend still holds in all subjects polled: other than normal school, students in the United States do not do many subject lessons compared to the rest of the world. This can be an easy fix for educators; another evening period, or another week of classes every year could help this issue, since many of the other countries do take other lessons outside of school. Both of those options would help American students get better compared to the other countries. One could also say that it shows the students in the US have the same opinion and mindset in regards to learning and developing a subject, so maybe increasing the rigor of US educations standards, not by much, but move on a slow incline, pushing students to be the best they can be. 
