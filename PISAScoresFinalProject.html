@@ -61,6 +61,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="mission" class="section level1">
 <h1>Mission</h1>
 <p>The mission of these visualizations is to see if there is a way for the United States to improve its education system. In the last 50 years, several countries have passed the United States in overall education success, with the U.S. falling to 14th in the most recent ranking. We will look at a few of the countries above the United States, using the Programme for International Student Assessment (PISA), compiled the by Organisation for Economic Co-operation and Development (OECD). This data had over 400,000 observations of several hundred variables.</p>
+<p>The dataset is quite large, so if you copy the following url into your browser, the download will start. Then save it into the folder in which you saved this .rmd file if you would like to edit.</p>
+<p><a href="http://beta.icm.edu.pl/PISAcontest/data/student2012.rda">http://beta.icm.edu.pl/PISAcontest/data/student2012.rda</a></p>
 <pre class="r"><code>suppressPackageStartupMessages(library(googleVis))
 library(ggplot2)
 library(gridExtra)
@@ -74,7 +76,7 @@ load(&quot;student2012.rda&quot;)</code></pre>
 </div>
 <div id="countries-in-data" class="section level1">
 <h1>Countries in Data</h1>
-<p>This is a visualization of all of the countries that the OECD did their survey in.</p>
+<p>This is a visualization of all of the countries that the OECD did their survey in. They included countries from all over the world.</p>
 <pre class="r"><code>Country &lt;- gvisGeoChart(student2012, &quot;CNT&quot;, &quot;&quot;, options = list(region = &quot;world&quot;, 
     displayMode = &quot;auto&quot;, resolution = &quot;countries&quot;, width = 600, 
     height = 400))

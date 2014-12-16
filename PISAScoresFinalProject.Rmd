@@ -37,7 +37,7 @@ library(dplyr)
 load("student2012.rda")
 ```
 #Countries in Data
-This is a visualization of all of the countries that the OECD did their survey in. 
+This is a visualization of all of the countries that the OECD did their survey in. They included countries from all over the world. 
 ```{r}
 Country <- gvisGeoChart(student2012, "CNT", "",
                           options=list(region="world", displayMode="auto", resolution="countries",
