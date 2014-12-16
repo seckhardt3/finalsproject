@@ -77,7 +77,7 @@ Questions2012<-Select2012%>%
   select(contains("CNT"),contains("ST04"),contains("ST07"),contains("ST29"),contains("ST43"),contains("ST44"),contains("ST46"),contains("ST49"),contains("ST55"),contains("ST57"),contains("ST69"),contains("ST70"),contains("ST71"))
 
 
-ggplot(Questions2012, aes(x=ST07Q01,fill=CNT))+geom_bar(position="dodge")
+ggplot(Questions2012, aes(x=ST07Q01,fill=CNT))+geom_bar(position="dodge")+ggtitle('Have You Failed a Grade?')
 
 ```
 As you can see with the graph above, there are not very many people failing entire grades. We then looked at those that said they had failed, by filtering for only those that said "Yes, once"
@@ -104,7 +104,7 @@ MathEnjoy<-Questions2012%>%
   filter(ST29Q04!="NA")%>%
   filter(CNT!="United Kingdom")
 
-ggplot(MathEnjoy, aes(x=ST29Q04,fill=CNT))+geom_bar(position="dodge")
+ggplot(MathEnjoy, aes(x=ST29Q04,fill=CNT))+geom_bar(position="dodge")+ggtitle('Do You Do Math Because you Enjoy It?')
 ```
 Not surprisingly, many of those polled disagree with the previous statement. Only Singapore, in the purple, really likes math more than it dislikes it. The United States falls right within the rest of the pack in enjoyment. 
 
@@ -114,7 +114,7 @@ The next question is "Do you beleive math will improve your career?"
 MathCareer<-Questions2012%>%
   filter(ST29Q05!="NA")
 
-ggplot(MathCareer, aes(x=ST29Q05,fill=CNT))+geom_bar(position="dodge")
+ggplot(MathCareer, aes(x=ST29Q05,fill=CNT))+geom_bar(position="dodge")+ggtitle('Do You Beleive Math Will Improve Your Career?')
 ```
 Along with the pack, the United States' students believe that their careers will improve because they know math. Only Japan stands out, with a fair amount saying the opposite. 
 
@@ -124,7 +124,7 @@ The next question was "Do you expect to study math in the future?"
 MathStudy<-Questions2012%>%
   filter(ST29Q07!="NA")
 
-ggplot(MathStudy, aes(x=ST29Q07,fill=CNT))+geom_bar(position="dodge")
+ggplot(MathStudy, aes(x=ST29Q07,fill=CNT))+geom_bar(position="dodge")+ggtitle('Do You Expect To Study Math In The Future?')
 
 ```
 Many students expect to have to use math in the future when it is involved with subects they are interested in. 
@@ -138,7 +138,7 @@ Our next thought is perhaps effort on math studies may have been an issue for th
 MathEffort<-Questions2012%>%
   filter(ST43Q01!="NA")
 
-ggplot(MathEffort, aes(x=ST43Q01,fill=CNT))+geom_bar(position="dodge")
+ggplot(MathEffort, aes(x=ST43Q01,fill=CNT))+geom_bar(position="dodge")+ggtitle('If You Put In The Effort, Can You Succeed In Math?')
 ```
 Across the board, each of these countries' students believe that they can put enough effort to succeed into math, with very few disagreeing. the United States is in that pack as well. Since many students believe that if they can put in the effort, then they can succeed in math, the demands of other issues may be too high for the students to put in the amount of effort. This next graph shows whether the demands of other time constraints are too high.
 
@@ -147,7 +147,7 @@ Across the board, each of these countries' students believe that they can put en
 MathDemands<-Questions2012%>%
   filter(ST43Q03!="NA")
 
-ggplot(MathDemands, aes(x=ST43Q03,fill=CNT))+geom_bar(position="dodge")
+ggplot(MathDemands, aes(x=ST43Q03,fill=CNT))+geom_bar(position="dodge")+ggtitle('Do You Have Too Many Other Demands?')
 ```
 Most of the students polled say that other subjects are not too demanding, and the U.S. is right in the pack with the top 10 nations. 
 
@@ -155,7 +155,7 @@ Another factor we looked at was whether math is too difficult. The next question
 ```{r}
 MathDifficulty<-Questions2012%>%
   filter(ST44Q01!="NA")
-ggplot(MathDifficulty, aes(x=ST44Q01,fill=CNT))+geom_bar(position="dodge")
+ggplot(MathDifficulty, aes(x=ST44Q01,fill=CNT))+geom_bar(position="dodge")+ggtitle('If You Fail, Is It Due To Difficulty?')
 ```
 As we can see, this is the case for many students. The United States, though, is still going with the pack here, and not particularly standing out. 
 So effort, demands, and difficulty are not a factor is how the U.S. is performing comparing to the rest of the world. Lets look at another area to see how the United States compares. 
@@ -167,7 +167,7 @@ The first question is "Do you get your homework done before class time on a usua
 ```{r}
 MathHWK<-Questions2012%>%
   filter(ST46Q01!="NA")
-ggplot(MathHWK, aes(x=ST46Q01,fill=CNT))+geom_bar(position="dodge")
+ggplot(MathHWK, aes(x=ST46Q01,fill=CNT))+geom_bar(position="dodge")+ggtitle('How Often Do You Finish Your Homework On Time?')
 ```
 As far as homework goes, the United States, for the most part does exactly what the rest of the top 10 does: gets their homework done on time. 
 
@@ -175,7 +175,7 @@ The next question is about study preparation: Do you study enough for exams?
 ```{r}
 MathPrep<-Questions2012%>%
   filter(ST46Q03!="NA")
-ggplot(MathPrep, aes(x=ST46Q03,fill=CNT))+geom_bar(position="dodge")
+ggplot(MathPrep, aes(x=ST46Q03,fill=CNT))+geom_bar(position="dodge")+ggtitle('Do You Study Enough?')
 ```
 The United States says that for the most part, they are, and they are right there with the rest of the top 10. 
 
@@ -183,7 +183,7 @@ The next question is "Do you keep studying until you understand the material?"
 ```{r}
 MathHours<-Questions2012%>%
   filter(ST49Q05!="NA")
-ggplot(MathHours, aes(x=ST49Q05,fill=CNT))+geom_bar(position="dodge")
+ggplot(MathHours, aes(x=ST49Q05,fill=CNT))+geom_bar(position="dodge")+ggtitle('Do You Study Until Full Understanding?')
 ```
 Once again, the United States is still right in the mix of things in this case as well. So far, there is no really large difference between how the United States behaves on education compared to the rest of the world. 
 
@@ -195,7 +195,7 @@ The first subject we look at is math.
 ```{r}
 SubjectHoursMath<-Questions2012%>%
   filter(ST55Q02!="NA")
-ggplot(SubjectHoursMath, aes(x=ST55Q02,fill=CNT))+geom_bar(position="dodge")
+ggplot(SubjectHoursMath, aes(x=ST55Q02,fill=CNT))+geom_bar(position="dodge")+ggtitle('Hours Of Outside Lessons: Math')
 ```
 To us, it looked like there was a bit of a difference here than in the rest of the questions. The United States sees a very drastic drop off as hours of lessons outside of school increases. This also occurs at a faster rate than most of the other nations. The only country that seems to drop off at a faster rate is Ireland. 
 
@@ -203,19 +203,19 @@ We looked at the other subjects just for this reason. Here are the other subject
 ```{r}
 SubjectHoursLanguage<-Questions2012%>%
   filter(ST55Q01!="NA")
-ggplot(SubjectHoursLanguage, aes(x=ST55Q01,fill=CNT))+geom_bar(position="dodge")
+ggplot(SubjectHoursLanguage, aes(x=ST55Q01,fill=CNT))+geom_bar(position="dodge")+ggtitle('Hours Of Outside Lessons: Language of Country')
 ```
 
 ```{r}
 SubjectHoursScience<-Questions2012%>%
   filter(ST55Q03!="NA")
-ggplot(SubjectHoursScience, aes(x=ST55Q03,fill=CNT))+geom_bar(position="dodge")
+ggplot(SubjectHoursScience, aes(x=ST55Q03,fill=CNT))+geom_bar(position="dodge")+ggtitle('Hours Of Outside Lessons: Science')
 ```
 
 ```{r}
 SubjectHours<-Questions2012%>%
   filter(ST55Q04!="NA")
-ggplot(SubjectHours, aes(x=ST55Q04,fill=CNT))+geom_bar(position="dodge")
+ggplot(SubjectHours, aes(x=ST55Q04,fill=CNT))+geom_bar(position="dodge")+ggtitle('Hours Of Outside Lessons: Other')
 ```
 
 This trend still holds in all subjects polled: other than normal school, students in the United States do not do many subject lessons compared to the rest of the world. This can be an easy fix for educators; another evening period, or another week of classes every year could help this issue, since many of the other countries do take other lessons outside of school. Both of those options would help American students get better compared to the other countries. 
